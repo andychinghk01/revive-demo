@@ -1,11 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <h1>Hello 01</h1>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Revive Adserver Demo</title>
+    <!-- Load dependent stylesheets. -->
+    <link
+      rel="stylesheet"
+      href="//googleads.github.io/videojs-ima/node_modules/video.js/dist/video-js.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//googleads.github.io/videojs-ima/node_modules/videojs-contrib-ads/dist/videojs.ads.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//googleads.github.io/videojs-ima/dist/videojs.ima.css"
+    />
+    <script async src="//servedby.revive-adserver.net/asyncjs.php"></script>
+  </head>
+  <body>
+    <h1>Revive Adserver Demonstration</h1>
+
+    <h2>1. Ad shows on desktop browser only</h2>
+    <p>We use custom delivery rule sets built upon useragent.</p>
+    <div id="ad-desktop">
+      <ins
+        data-revive-zoneid="24665"
+        data-revive-id="727bec5e09208690b050ccfc6a45d384"
+      ></ins>
+    </div>
+
+    <h2>2. Ad shows on mobile browser only</h2>
+    <p>We use custom delivery rule sets built upon useragent.</p>
+    <div id="ad-mobile">
+      <ins
+        data-revive-zoneid="24666"
+        data-revive-id="727bec5e09208690b050ccfc6a45d384"
+      ></ins>
+    </div>
+
+    <h2>3. Ad shows JPEG image</h2>
+    <p>Banner image is jpeg format.</p>
+    <div id="ad-jpeg">
+      <ins
+        data-revive-zoneid="24667"
+        data-revive-id="727bec5e09208690b050ccfc6a45d384"
+      ></ins>
+    </div>
+
+    <h2>4. Ad shows GIF image</h2>
+    <p>Banner image is gif format.</p>
+    <div id="ad-gif">
+      <ins
+        data-revive-zoneid="24668"
+        data-revive-id="727bec5e09208690b050ccfc6a45d384"
+      ></ins>
+    </div>
+
+    <h2>5. Ad shows PNG image</h2>
+    <p>Banner image is png format.</p>
+    <div id="ad-png">
+      <ins
+        data-revive-zoneid="24669"
+        data-revive-id="727bec5e09208690b050ccfc6a45d384"
+      ></ins>
+    </div>
+
+    <h2>6. Ad shows HTML</h2>
+    <p>
+      Generic HTML Banner would be injected into dashboard preview section
+      directly without using iframe and it may break the layout.
+    </p>
+    <p>Better use HTML5 Banner (ZIP package)</p>
+    <div id="ad-html">
+      <ins
+        data-revive-zoneid="24670"
+        data-revive-id="727bec5e09208690b050ccfc6a45d384"
+      ></ins>
+    </div>
+
+    <h2>7-9. Video ads (pre-roll, mid-roll, post-roll)</h2>
+    <p>It supports mp4 and webm format only.</p>
+    <p>
+      It output link of VAST2 xml for video player integration. VAST2 does not
+      control ad placement, can do it in video player.
+    </p>
+    <p>
+      The demo process both the VAST and the video at client side. Consider
+      using Server-Side Ad Insertion (SSAI) to prevent ad blocker.
+    </p>
+    <div id="ad-video">
+      <video
+        id="my-video"
+        class="video-js"
+        controls
+        preload="auto"
+        autoplay="false"
+      >
+        <source
+          src="https://storage.googleapis.com/gvabox/media/samples/android.mp4"
+          type="video/mp4"
+        />
+      </video>
+      <!-- Load dependent scripts -->
+      <script src="//googleads.github.io/videojs-ima/node_modules/video.js/dist/video.min.js"></script>
+      <script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+      <script src="//googleads.github.io/videojs-ima/node_modules/videojs-contrib-ads/dist/videojs.ads.min.js"></script>
+      <script src="//googleads.github.io/videojs-ima/dist/videojs.ima.js"></script>
+      <script>
+        (function () {
+          var player = videojs("my-video");
+
+          player.ima({
+            id: "my-video",
+            adTagUrl:
+              "https://servedby.revive-adserver.net/fc.php?script=apVideo:vast2&zoneid=24671",
+          });
+        })();
+      </script>
+    </div>
+
+    <h2>10. Ad targets specified browsers</h2>
+    <p>
+      It shows different banners for chrome, firefox and safari respectively.
+    </p>
+    <div id="ad-browser">
+      <ins
+        data-revive-zoneid="24672"
+        data-revive-id="727bec5e09208690b050ccfc6a45d384"
+      ></ins>
+    </div>
+
+    <h2>11. Ad targets specified geolocation</h2>
+    <p>It shows banner if the user is in HK.</p>
+    <p>No banner if not in HK.</p>
+    <div id="ad-geo">
+      <ins
+        data-revive-zoneid="24678"
+        data-revive-id="727bec5e09208690b050ccfc6a45d384"
+      ></ins>
+    </div>
+
+    <h2>12. Ad targets specified operating system</h2>
+    <p>
+      Is shows respective banner when the user is using Mac, Windows, iOS or
+      Android.
+    </p>
+    <p>It fallback to use demo_zone_brower if none matched.</p>
+    <div id="ad-os">
+      <ins
+        data-revive-zoneid="24672"
+        data-revive-id="727bec5e09208690b050ccfc6a45d384"
+      ></ins>
+    </div>
+
+    <!-- <h2>13. Display ad by different article ID</h2>
+    <h3>Article ID: 123</h3>
+    <div id="ad-article-123">
+      <script type="text/javascript">
+        var article_id = "123";
+      </script>
+      <script
+        type="text/javascript"
+        src="https://your-adserver.com/delivery/asyncjs.php?zoneid=9"
+      ></script>
+    </div>
+    <h3>Article ID: 456</h3>
+    <div id="ad-article-456">
+      <script type="text/javascript">
+        var article_id = "456";
+      </script>
+      <script
+        type="text/javascript"
+        src="https://your-adserver.com/delivery/asyncjs.php?zoneid=9"
+      ></script>
+    </div> -->
+  </body>
 </html>
