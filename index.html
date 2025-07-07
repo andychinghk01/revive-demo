@@ -144,7 +144,7 @@
 
     <h2>12. Ad targets specified operating system</h2>
     <p>
-      Is shows respective banner when the user is using Mac, Windows, iOS or
+      It shows respective banner when the user is using Mac, Windows, iOS or
       Android.
     </p>
     <p>It fallback to use demo_zone_brower if none matched.</p>
@@ -155,26 +155,136 @@
       ></ins>
     </div>
 
-    <!-- <h2>13. Display ad by different article ID</h2>
-    <h3>Article ID: 123</h3>
-    <div id="ad-article-123">
-      <script type="text/javascript">
-        var article_id = "123";
-      </script>
-      <script
-        type="text/javascript"
-        src="https://your-adserver.com/delivery/asyncjs.php?zoneid=9"
-      ></script>
-    </div>
-    <h3>Article ID: 456</h3>
-    <div id="ad-article-456">
-      <script type="text/javascript">
-        var article_id = "456";
-      </script>
-      <script
-        type="text/javascript"
-        src="https://your-adserver.com/delivery/asyncjs.php?zoneid=9"
-      ></script>
-    </div> -->
+    <h2>13. Display ad by different article ID</h2>
+    <p>
+      It reuse the same zone but different article IDs (through tag variable) to
+      show respective banner.
+    </p>
+    <p>
+      Using "Async JS" tag type will always show the same banner as the tag
+      values wil be overwrite each other for the page call.
+    </p>
+    <p>Either use non-async-js tag type or place them in different pages.</p>
+    <p>
+      ref:
+      <a
+        href="https://revive-adserver.atlassian.net/wiki/spaces/DOCS/pages/721518/Tag+Variables"
+        target="_blank"
+        >Tag Variables</a
+      >,
+      <a
+        href="https://revive-adserver.atlassian.net/wiki/spaces/DOCS/pages/721014/Site+Delivery+Rules#SiteDeliveryRules-Site-Variable"
+        target="_blank"
+        >Site - Variable</a
+      >
+    </p>
+    <h3>13.1 By using JS tag</h3>
+    <table border="1">
+      <tr>
+        <th>
+          <p>Article 123</p>
+        </th>
+        <th>
+          <p>Article 456</p>
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <script type="text/javascript">
+            <!--//<![CDATA[
+            var m3_u =
+              location.protocol == "https:"
+                ? "https://servedby.revive-adserver.net/ajs.php"
+                : "http://servedby.revive-adserver.net/ajs.php";
+            var m3_r = Math.floor(Math.random() * 99999999999);
+            if (!document.MAX_used) document.MAX_used = ",";
+            document.write("<scr" + "ipt type='text/javascript' src='" + m3_u);
+            document.write("?zoneid=24686");
+            document.write("&amp;article=123");
+            document.write("&amp;cb=" + m3_r);
+            if (document.MAX_used != ",")
+              document.write("&amp;exclude=" + document.MAX_used);
+            document.write(
+              document.charset
+                ? "&amp;charset=" + document.charset
+                : document.characterSet
+                ? "&amp;charset=" + document.characterSet
+                : ""
+            );
+            document.write("&amp;loc=" + escape(window.location));
+            if (document.referrer)
+              document.write("&amp;referer=" + escape(document.referrer));
+            if (document.context)
+              document.write("&context=" + escape(document.context));
+            document.write("'><\/scr" + "ipt>");
+            //]]>-->
+          </script>
+        </td>
+        <td>
+          <script type="text/javascript">
+            <!--//<![CDATA[
+            var m3_u =
+              location.protocol == "https:"
+                ? "https://servedby.revive-adserver.net/ajs.php"
+                : "http://servedby.revive-adserver.net/ajs.php";
+            var m3_r = Math.floor(Math.random() * 99999999999);
+            if (!document.MAX_used) document.MAX_used = ",";
+            document.write("<scr" + "ipt type='text/javascript' src='" + m3_u);
+            document.write("?zoneid=24686");
+            document.write("&amp;article=456");
+            document.write("&amp;cb=" + m3_r);
+            if (document.MAX_used != ",")
+              document.write("&amp;exclude=" + document.MAX_used);
+            document.write(
+              document.charset
+                ? "&amp;charset=" + document.charset
+                : document.characterSet
+                ? "&amp;charset=" + document.characterSet
+                : ""
+            );
+            document.write("&amp;loc=" + escape(window.location));
+            if (document.referrer)
+              document.write("&amp;referer=" + escape(document.referrer));
+            if (document.context)
+              document.write("&context=" + escape(document.context));
+            document.write("'><\/scr" + "ipt>");
+            //]]>-->
+          </script>
+        </td>
+      </tr>
+    </table>
+    <h3>13.2 By using async JS on different pages</h3>
+    <a href="/article-123.html"><button>👉 Go to article 123</button></a>
+    <a href="/article-456.html"><button>👉 Go to article 456</button></a>
+    <h2>
+      14. Priority over Remnant, Contact and Override Campaigns (Text Banners)
+    </h2>
+    <table border="1">
+      <tr>
+        <th>Remnant + Contract + Override</th>
+        <th>Remnant + Contact</th>
+        <th>Remnant Only</th>
+      </tr>
+      <tr>
+        <td>
+          <ins
+            data-revive-zoneid="24687"
+            data-revive-id="727bec5e09208690b050ccfc6a45d384"
+          ></ins>
+        </td>
+        <td>
+          <ins
+            data-revive-zoneid="24692"
+            data-revive-id="727bec5e09208690b050ccfc6a45d384"
+          ></ins>
+        </td>
+        <td>
+          <ins
+            data-revive-zoneid="24693"
+            data-revive-id="727bec5e09208690b050ccfc6a45d384"
+          ></ins>
+        </td>
+      </tr>
+    </table>
   </body>
 </html>
