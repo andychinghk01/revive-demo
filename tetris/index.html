@@ -18,6 +18,26 @@
         overflow: hidden;
       }
 
+      #clickButton {
+        position: absolute;
+        bottom: 2px;
+        right: 2px;
+        background: #00ff00;
+        color: #000;
+        padding: 8px 6px;
+        font-size: 10px;
+        text-decoration: none;
+        border-radius: 2px;
+        font-weight: bold;
+        z-index: 10;
+        border: none;
+        cursor: pointer;
+      }
+
+      #clickButton:hover {
+        background: #00cc00;
+      }
+
       #gameContainer {
         position: relative;
         width: 180px;
@@ -56,9 +76,17 @@
         border-radius: 3px;
       }
     </style>
+    <script>
+      var clickTag = "{clickurl}"; // Revive Adserver replaces this with the tracked URL
+    </script>
   </head>
   <body>
     <div id="gameContainer">
+      <a
+        href="javascript:void(window.open(clickTag, '_blank'));"
+        id="clickButton"
+        >Click Me</a
+      >
       <canvas id="gameCanvas" width="120" height="140"></canvas>
       <div id="gameInfo">
         <div>Score: <span id="score">0</span></div>
